@@ -58,14 +58,14 @@
       client.onMessageArrived = function(message) {
         // $("#status").text("onMessageArrived:" + message.payloadString).removeClass().addClass("error");
         console.log(message.payloadString);
-        if (str.charAt(0) == "L") {
+        if (message.payloadString.charAt(0) == "L") {
           level = message.payloadString
         }
         if (level != "") {
           document.getElementById("BottleBin").style.width = level + '%';
         }
       }
-      
+
     });
     
     var mqttSend = function(topic, msg) {

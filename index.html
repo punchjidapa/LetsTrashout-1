@@ -28,8 +28,8 @@
       mqtt_user: "Node1",
       mqtt_password: "aabbccdd"
     };
-    
-    for (dataSelector = 0; dataSelector <=1; dataSelector++) {
+
+    for (dataSelector = 0; dataSelector <= 1; dataSelector++) {
       $(document).ready(function(e) {
       // Create a client instance
       client = new Paho.MQTT.Client(config.mqtt_server, config.mqtt_websockets_port, "web_" + parseInt(Math.random() * 100, 10)); 
@@ -69,6 +69,7 @@
           position = message.payloadString;
         }
       }
+
     });
     
     var mqttSend = function(topic, msg) {
@@ -76,13 +77,9 @@
       message.destinationName = topic;
       client.send(message); 
     }
-      if (dataSelector == 1) {
-        dataSelector = 0;
-      }
     }
-
     document.getElementById("BottleBin").style.width = level + '%';
-    
+    dataSelector = 0;
     </script>
 
 <body class="landing-page sidebar-collapse">

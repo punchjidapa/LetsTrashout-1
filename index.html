@@ -61,8 +61,24 @@
         if (message.payloadString.charAt(0) == "L") {
           level = message.payloadString.substring(1);
         }
-        if (level != "") {
-          document.getElementById("BottleBin").style.width = level + '%';
+        if (message.payloadString.charAt(0) == "P") {
+          position = message.payloadString.substring(1);
+        }
+        if (level != "" && position != "") {
+          if (position == 0) {
+            document.getElementById("BottleBin").style.width = level + '%';
+          }
+          if (position == 1) {
+            document.getElementById("GlassBin").style.width = level + '%';
+          }
+          if (position == 2) {
+            document.getElementById("CartonBin").style.width = level + '%';
+          }
+          if (position == 3) {
+            document.getElementById("CanBin").style.width = level + '%';
+          }
+          level = "";
+          position = "";
         }
       }
 

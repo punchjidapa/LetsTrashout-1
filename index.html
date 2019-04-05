@@ -59,7 +59,7 @@
         // $("#status").text("onMessageArrived:" + message.payloadString).removeClass().addClass("error");
         console.log(message.payloadString);
         if (message.payloadString.charAt(0) == "L") {
-          level = message.payloadString
+          level = message.payloadString.substring(1);
         }
         if (level != "") {
           document.getElementById("BottleBin").style.width = level + '%';

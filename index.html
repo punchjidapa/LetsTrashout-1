@@ -69,7 +69,7 @@
           position = message.payloadString;
         }
       }
-
+      document.getElementById("BottleBin").style.width = 50 + '%';
     });
     
     var mqttSend = function(topic, msg) {
@@ -78,7 +78,6 @@
       client.send(message); 
     }
     }
-    document.getElementById("BottleBin").style.width = level + '%';
     dataSelector = 0;
     </script>
 

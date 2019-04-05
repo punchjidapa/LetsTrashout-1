@@ -1,5 +1,8 @@
 #include <ESP8266WiFi.h>
+#include <SoftwareSerial.h>
 #include <MQTTClient.h>
+
+SoftwareSerial UNOSerial(D6, D5);
 
 const char* ssid = "ModDevLab_2.4GHz";
 const char* password = "3313033130A*";
@@ -10,12 +13,15 @@ MQTTClient client;
 unsigned long lastMillis = 0;
 
 uint16_t analogData = 0;
+String positionData = "";
 
 void setup() {
-  
-  Serial.begin(115200);
+
   pinMode(A0, INPUT);
+  Serial.begin(9600);
+  UNOSerial.begin(9600);
   delay(10);
+
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -36,7 +42,7 @@ void setup() {
   Serial.print("connecting to MQTT broker...");
   client.begin("m16.cloudmqtt.com", 16629, WiFiclient);
   connect();
-  
+
 }
 
 void connect() {
@@ -49,7 +55,7 @@ void connect() {
 }
 
 void loop() {
-  
+
   client.loop();
   if (!client.connected()) {
     connect();
@@ -59,8 +65,17 @@ void loop() {
     lastMillis = millis();
     analogData = analogRead(A0);
     analogData = map(analogData, 0, 1023, 0, 100);
+    //positionData = random(0, 3);
+    Serial.print("IR : ");
     Serial.println(analogData);
-    client.publish("/sensor/level", (String)analogData);
+    client.publish("/sensor/level", "L" + (String)analogData);
   }
   
+  UNOSerial.write("s");
+  if (UNOSerial.available() > 0) {
+    positionData = UNOSerial.read();
+    Serial.print("Position : ");
+    Serial.println(positionData);
+    client.publish("/sensor/position", "P" + positionData);
+  }
 }

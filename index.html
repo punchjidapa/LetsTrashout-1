@@ -37,8 +37,8 @@
         userName: config.mqtt_user,
         password: config.mqtt_password,
         onSuccess: function() {
-          client.subscribe("/sensor/level");
-          mqttSend("/sensor/level", "GET");
+          client.subscribe("/sensor/position");
+          mqttSend("/sensor/position", "GET");
         },
         onFailure: function(e) {
           // console.log(e);

@@ -64,7 +64,7 @@ void loop() {
   if (millis() - lastMillis > 1000) {
     lastMillis = millis();
     analogData = analogRead(A0);
-    analogData = map(analogData, 0, 1023, 0, 100);
+    analogData = map(analogData, 0, 1023, 0, 100); //////measure bin///////
     //positionData = random(0, 3);
     Serial.print("IR : ");
     Serial.println(analogData);
@@ -78,4 +78,5 @@ void loop() {
     Serial.println(positionData);
     client.publish("/sensor/position", "P" + positionData);
   }
+  delay(10);
 }

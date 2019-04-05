@@ -69,7 +69,9 @@
           position = message.payloadString;
         }
       }
-      document.getElementById("BottleBin").style.width = 50 + '%';
+      for (var i = 0; i <= 100; i+20) {
+        document.getElementById("BottleBin").style.width = i + '%';
+      }
     });
     
     var mqttSend = function(topic, msg) {

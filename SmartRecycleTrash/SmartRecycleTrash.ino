@@ -144,7 +144,7 @@ void loop()
       if ((weight + offset <= 0.0115) || (weight + offset >= 0.0150 && weight + offset <= 0.020 ))
       {
 
-        positionData = 2;                       /////////////////////////////////
+        positionData = 3;                       /////////////////////////////////
         Serial.println(positionData);
         if (NodeSerial.available() > 0)
         {
@@ -198,7 +198,7 @@ void loop()
       }
       else
       {
-        positionData = 3;                       /////////////////////////////////
+        positionData = 4;                       /////////////////////////////////
         Serial.println(positionData);
         if (NodeSerial.available() > 0)
         {
@@ -266,7 +266,7 @@ void loop()
       }
       else if (weight + offset > 0.12)
       {
-        positionData = 1;                       /////////////////////////////////
+        positionData = 2;                       /////////////////////////////////
         Serial.println(positionData);
         if (NodeSerial.available() > 0)
         {
@@ -311,7 +311,7 @@ void loop()
       }
       else
       {
-        positionData = 0;                       /////////////////////////////////
+        positionData = 1;                       /////////////////////////////////
         Serial.println(positionData);
         if (NodeSerial.available() > 0)
         {

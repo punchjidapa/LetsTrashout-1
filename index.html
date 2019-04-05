@@ -65,16 +65,16 @@
           position = message.payloadString.substring(1);
         }
         if (level != "" && position != "") {
-          if (position == 0) {
+          if (position == 1) {
             document.getElementById("BottleBin").style.width = level + '%';
           }
-          if (position == 1) {
+          if (position == 2) {
             document.getElementById("GlassBin").style.width = level + '%';
           }
-          if (position == 2) {
+          if (position == 3) {
             document.getElementById("CartonBin").style.width = level + '%';
           }
-          if (position == 3) {
+          if (position == 4) {
             document.getElementById("CanBin").style.width = level + '%';
           }
           level = "";

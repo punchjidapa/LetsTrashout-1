@@ -19,6 +19,9 @@
 </head>
 
 <script>
+    var dataSelector = 0;
+    var level = 0;
+    var position = 0;
     var config = {
       mqtt_server: "m16.cloudmqtt.com",
       mqtt_websockets_port: 36629,
@@ -26,7 +29,8 @@
       mqtt_password: "aabbccdd"
     };
     
-    $(document).ready(function(e) {
+    for (dataSelector = 0; dataSelector <=1; dataSelector++) {
+      $(document).ready(function(e) {
       // Create a client instance
       client = new Paho.MQTT.Client(config.mqtt_server, config.mqtt_websockets_port, "web_" + parseInt(Math.random() * 100, 10)); 
       //Example client = new Paho.MQTT.Client("m11.cloudmqtt.com", 32903, "web_" + parseInt(Math.random() * 100, 10));
@@ -37,8 +41,13 @@
         userName: config.mqtt_user,
         password: config.mqtt_password,
         onSuccess: function() {
-          client.subscribe("/sensor/level");
-          mqttSend("/sensor/level", "GET");
+          if (dataSelector == 0) {
+            client.subscribe("/sensor/level");
+            mqttSend("/sensor/level", "GET");
+          } else {
+            client.subscribe("/sensor/position");
+            mqttSend("/sensor/position", "GET");
+          }
         },
         onFailure: function(e) {
           // console.log(e);
@@ -54,9 +63,12 @@
       client.onMessageArrived = function(message) {
         // $("#status").text("onMessageArrived:" + message.payloadString).removeClass().addClass("error");
         console.log(message.payloadString);
-        document.getElementById("BottleBin").style.width = message.payloadString + '%';
+        if (dataSelector == 0) {
+          level = message.payloadString;
+        } else {
+          position = message.payloadString;
+        }
       }
-
     });
     
     var mqttSend = function(topic, msg) {
@@ -64,6 +76,13 @@
       message.destinationName = topic;
       client.send(message); 
     }
+      if (dataSelector == 1) {
+        dataSelector = 0;
+      }
+    }
+
+    document.getElementById("BottleBin").style.width = level + '%';
+    
     </script>
 
 <body class="landing-page sidebar-collapse">

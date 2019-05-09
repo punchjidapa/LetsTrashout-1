@@ -76,6 +76,19 @@ void loop() {
     positionData = UNOSerial.read();
     Serial.print("Position : ");
     Serial.println(positionData);
+    Serial.print("Type : ");
+    if (positionData == "1") {
+      Serial.println("Plastic bottle");
+      }
+     if (positionData == "2") {
+      Serial.println("Glass");
+      }
+     if (positionData == "3") {
+      Serial.println("Carton");
+      }
+     if (positionData == "4") {
+      Serial.println("Can");
+      }
     client.publish("/sensor/position", "P" + positionData);
   }
   delay(10);

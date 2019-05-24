@@ -5,7 +5,7 @@
 SoftwareSerial UNOSerial(D6, D5);
 
 const char* ssid = "ModDevLab_2.4GHz";
-const char* password = "3313033130A*";
+const char* password = "331303313022A*";
 
 WiFiClient WiFiclient;
 MQTTClient client;
